@@ -48,7 +48,7 @@
                                         <state key="normal" title="Log In"/>
                                         <connections>
                                             <action selector="loginBtnClicked" destination="BYZ-38-t0r" eventType="touchUpInside" id="pyr-Wx-tDn"/>
-                                            <segue destination="DLr-Qj-5wR" kind="show" id="y2P-XF-gDL"/>
+                                            <segue destination="DLr-Qj-5wR" kind="show" identifier="toUserAccount" id="y2P-XF-gDL"/>
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="56" translatesAutoresizingMaskIntoConstraints="NO" id="92j-ag-gI6">

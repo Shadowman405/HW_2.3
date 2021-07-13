@@ -20,6 +20,14 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         
         self.usernameTxtField.delegate = self
         self.passwordTxtField.delegate = self
+        
+        //Done button toolbar
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(loginBtnClicked))
+        toolBar.setItems([doneButton], animated: false)
+        passwordTxtField.inputAccessoryView = toolBar
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -73,7 +81,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: .none))
             self.present(alert, animated: true, completion: nil)
         } else {
-            return
+            performSegue(withIdentifier: "toUserAccount", sender: nil)
         }
     }
 // MARK: Reminders
