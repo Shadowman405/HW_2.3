@@ -67,42 +67,32 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
 // MARK: Login Button logics
     @IBAction func loginBtnClicked() {
         if usernameTxtField.text != testUser.name {
-            let alert = UIAlertController(
-                title: "Wrong Username",
-                message: "Please check your username",
-                preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: .none))
-            self.present(alert, animated: true, completion: nil)
+            alertWindowAppear(title: "Wrong Username", message: "Please check your username")
         } else if passwordTxtField.text != testUser.password {
-            let alert = UIAlertController(
-                title: "Wrong Password",
-                message: "Please check your password",
-                preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: .none))
-            self.present(alert, animated: true, completion: nil)
+            alertWindowAppear(title: "Wrong Password", message: "Please check your password")
         } else {
             performSegue(withIdentifier: "toUserAccount", sender: nil)
         }
     }
 // MARK: Reminders
     @IBAction func usrnameReminderClicked() {
-        let alert = UIAlertController(
-            title: "Username Reminder",
-            message: "Your username \(testUser.name)",
-            preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: .none))
-        self.present(alert, animated: true, completion: nil)
+        alertWindowAppear(title: "Username Reminder",
+                    message: "Your username \(testUser.name)")
     }
     
     @IBAction func passwordReminderClicked() {
+        alertWindowAppear(title: "Password Reminder",
+                    message: "Your password \(testUser.password)")
+    }
+    
+    func alertWindowAppear (title: String, message: String) {
         let alert = UIAlertController(
-            title: "Password Reminder",
-            message: "Your password \(testUser.password)",
+            title: title,
+            message: message,
             preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: .none))
         self.present(alert, animated: true, completion: nil)
     }
-    
 }
 
 // MARK: User class extension
