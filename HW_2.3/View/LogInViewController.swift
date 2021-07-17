@@ -12,7 +12,10 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usernameTxtField: UITextField!
     @IBOutlet weak var passwordTxtField: UITextField!
     //TestAcc
-    var testUser = User(name: "User", password: "111111")
+    //private var testUser = User(name: "User", password: "111111")
+    
+    
+    private var testUser1 = UserAccount(accountName: "User", userName: "Van", userLastname: "Darkholm", userPassword: "123456", info: "Perfomance artist", photo: "Gachistrong" )
     
     
     override func viewDidLoad() {
@@ -30,24 +33,33 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         passwordTxtField.inputAccessoryView = toolBar
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-    }
+
 // segue to userAcc VC
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let userAccountVC =
-                segue.destination as? UserAccountViewController
-        else {return}
-        userAccountVC.welcomeName = "Welcome , \(testUser.name) !"
+        if let barVC = segue.destination as? UITabBarController {
+            barVC.viewControllers?.forEach {
+                if let userAccVC = $0 as? UserAccountViewController {
+                    userAccVC.welcomeName = "Welcome , \(testUser1.userName) !"
+                    userAccVC.title = "Main"
+                }
+            }
+        }
+           else if let barVC = segue.destination as? UITabBarController {
+            barVC.viewControllers?.forEach {
+                if let userInfoVC = $0 as? UserInfoViewController {
+                    userInfoVC.infoLabel.text = testUser1.info
+                }
+            }
+        }
     }
     
 // unwind segue
     @IBAction func unwind(for segue: UIStoryboardSegue) {
-        guard let userAccountVC =
-                segue.source as? UserAccountViewController
-        else {return}
-        usernameTxtField.text = userAccountVC.usernameText
-        passwordTxtField.text = userAccountVC.usernameText
+//        guard let userAccountVC =
+//                segue.source as? UserAccountViewController
+//        else {return}
+        usernameTxtField.text = .none
+        passwordTxtField.text = .none
     }
 // switch between TxtFields
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -66,9 +78,9 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
 // MARK: Login Button logics
     @IBAction func loginBtnClicked() {
-        if usernameTxtField.text != testUser.name {
+        if usernameTxtField.text != testUser1.accountName {
             alertWindowAppear(title: "Wrong Username", message: "Please check your username")
-        } else if passwordTxtField.text != testUser.password {
+        } else if passwordTxtField.text != testUser1.userPassword {
             alertWindowAppear(title: "Wrong Password", message: "Please check your password")
         } else {
             performSegue(withIdentifier: "toUserAccount", sender: nil)
@@ -77,21 +89,12 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
 // MARK: Reminders
     @IBAction func usrnameReminderClicked() {
         alertWindowAppear(title: "Username Reminder",
-                    message: "Your username \(testUser.name)")
+                          message: "Your username \(testUser1.accountName)")
     }
     
     @IBAction func passwordReminderClicked() {
         alertWindowAppear(title: "Password Reminder",
-                    message: "Your password \(testUser.password)")
-    }
-    
-    func alertWindowAppear (title: String, message: String) {
-        let alert = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: .none))
-        self.present(alert, animated: true, completion: nil)
+                          message: "Your password \(testUser1.userPassword)")
     }
 }
 
@@ -105,5 +108,18 @@ extension LogInViewController {
             self.name = name
             self.password = password
         }
+    }
+    
+    func alertWindowAppear (title: String, message: String) {
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: .none))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
 }
