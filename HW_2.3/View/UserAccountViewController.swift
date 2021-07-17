@@ -19,6 +19,4 @@ class UserAccountViewController: UIViewController {
         super.viewDidLoad()
         welcomeLbl.text = welcomeName
     }
-    
-    
 }

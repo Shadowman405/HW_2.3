@@ -9,10 +9,11 @@ import UIKit
 
 class UserPhotoViewController: UIViewController {
     @IBOutlet weak var userPhoto: UIImageView!
+    var photo: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
 
 

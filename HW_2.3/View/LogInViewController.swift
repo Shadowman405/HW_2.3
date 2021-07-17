@@ -11,11 +11,8 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var usernameTxtField: UITextField!
     @IBOutlet weak var passwordTxtField: UITextField!
-    //TestAcc
-    //private var testUser = User(name: "User", password: "111111")
     
-    
-    private var testUser1 = UserAccount(accountName: "User", userName: "Van", userLastname: "Darkholm", userPassword: "123456", info: "Perfomance artist", photo: "Gachistrong" )
+    private var testUser1 = UserAccount(accountName: "User", userName: "Van", userLastname: "Darkholm", userPassword: "123456", info: "I'm hired for people to fulfill their fantasies, their deep dark fantasies. I was gonna be a movie star, you know, modeling and acting. After a hundred and two additions and small parts I decided y'know I had enough, Then I got in to Escort world. The client requests contain a lot of fetishes, so I just decided to go y'know... full Master, and change my entire house into a dungeon, uh... Dungeon Master. Now with a full dungeon in my house and It's going really well. ", photo: "GachiStrong" )
     
     
     override func viewDidLoad() {
@@ -36,19 +33,24 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
 
 // segue to userAcc VC
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let barVC = segue.destination as? UITabBarController {
-            barVC.viewControllers?.forEach {
-                if let userAccVC = $0 as? UserAccountViewController {
-                    userAccVC.welcomeName = "Welcome , \(testUser1.userName) !"
-                    userAccVC.title = "Main"
-                }
+        let tabBC = segue.destination as! UITabBarController
+        for viewVC in tabBC.viewControllers! {
+            if let userAccVC = viewVC as? UserAccountViewController {
+                userAccVC.welcomeName = "Welcome , \(testUser1.userName) !"
+                userAccVC.title = "Main"
             }
         }
-           else if let barVC = segue.destination as? UITabBarController {
-            barVC.viewControllers?.forEach {
-                if let userInfoVC = $0 as? UserInfoViewController {
-                    userInfoVC.infoLabel.text = testUser1.info
-                }
+        for viewVC in tabBC.viewControllers! {
+            if let userInfoVC = viewVC as? UserInfoViewController {
+                userInfoVC.userInfo = testUser1.info
+                userInfoVC.title = "\(testUser1.userName)"
+            }
+
+        }
+        for viewVC in tabBC.viewControllers! {
+            if let navVC = viewVC as? UINavigationController {
+                let userPhotoVC = navVC.topViewController as? UserPhotoViewController
+                userPhotoVC?.userPhoto.image = UIImage(named: testUser1.photo)
             }
         }
     }
