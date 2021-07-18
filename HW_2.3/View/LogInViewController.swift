@@ -17,7 +17,6 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.usernameTxtField.delegate = self
         self.passwordTxtField.delegate = self
         
@@ -36,21 +35,11 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         let tabBC = segue.destination as! UITabBarController
         for viewVC in tabBC.viewControllers! {
             if let userAccVC = viewVC as? UserAccountViewController {
-                userAccVC.welcomeName = "Welcome , \(testUser1.userName) !"
+                userAccVC.welcomeName = testUser1.userName
                 userAccVC.title = "Main"
-            }
-        }
-        for viewVC in tabBC.viewControllers! {
-            if let userInfoVC = viewVC as? UserInfoViewController {
-                userInfoVC.userInfo = testUser1.info
+            } else if let userInfoVC = viewVC as? UserInfoViewController {
+                userInfoVC.userInfo = testUser1
                 userInfoVC.title = "\(testUser1.userName)"
-            }
-
-        }
-        for viewVC in tabBC.viewControllers! {
-            if let navVC = viewVC as? UINavigationController {
-                let userPhotoVC = navVC.topViewController as? UserPhotoViewController
-                userPhotoVC?.userPhoto.image = UIImage(named: testUser1.photo)
             }
         }
     }

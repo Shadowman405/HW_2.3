@@ -9,11 +9,11 @@ import UIKit
 
 class UserPhotoViewController: UIViewController {
     @IBOutlet weak var userPhoto: UIImageView!
-    var photo: String!
+    var userAccount: UserAccount?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        userPhoto.image = UIImage(named: userAccount?.photo ?? "")
     }
 
 

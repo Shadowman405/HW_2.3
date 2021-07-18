@@ -10,13 +10,10 @@ import UIKit
 class UserAccountViewController: UIViewController {
     @IBOutlet weak var welcomeLbl: UILabel!
     
-    var usernameText = ""
-    var passwordText = ""
-    
-    var welcomeName: String!
+    var welcomeName = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        welcomeLbl.text = welcomeName
+        welcomeLbl.text = "Welcome , \(welcomeName) !"
     }
 }
