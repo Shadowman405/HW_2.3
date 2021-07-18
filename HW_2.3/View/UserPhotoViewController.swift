@@ -13,7 +13,7 @@ class UserPhotoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        userPhoto.image = UIImage(named: userAccount?.photo ?? "")
+        userPhoto.image = UIImage(named: userAccount?.person.photo ?? "")
     }
 
 

@@ -12,7 +12,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usernameTxtField: UITextField!
     @IBOutlet weak var passwordTxtField: UITextField!
     
-    private var testUser1 = UserAccount(accountName: "User", userName: "Van", userLastname: "Darkholm", userPassword: "123456", info: "I'm hired for people to fulfill their fantasies, their deep dark fantasies. I was gonna be a movie star, you know, modeling and acting. After a hundred and two additions and small parts I decided y'know I had enough, Then I got in to Escort world. The client requests contain a lot of fetishes, so I just decided to go y'know... full Master, and change my entire house into a dungeon, uh... Dungeon Master. Now with a full dungeon in my house and It's going really well. ", photo: "GachiStrong" )
+    private var testUser1 = UserAccount.getUserData()
     
     
     override func viewDidLoad() {
@@ -35,11 +35,12 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         let tabBC = segue.destination as! UITabBarController
         for viewVC in tabBC.viewControllers! {
             if let userAccVC = viewVC as? UserAccountViewController {
-                userAccVC.welcomeName = testUser1.userName
+                userAccVC.welcomeName = testUser1.person.userName
+                userAccVC.welcomeLastName = testUser1.person.userLastName
                 userAccVC.title = "Main"
             } else if let userInfoVC = viewVC as? UserInfoViewController {
                 userInfoVC.userInfo = testUser1
-                userInfoVC.title = "\(testUser1.userName)"
+                userInfoVC.title = "\(testUser1.person.userName)"
             }
         }
     }

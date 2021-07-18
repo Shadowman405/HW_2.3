@@ -12,7 +12,7 @@ class UserInfoViewController: UIViewController {
     var userInfo: UserAccount?
     
     override func viewDidLoad() {
-        infoLabel.text = userInfo?.info
+        infoLabel.text = userInfo?.person.info
         super.viewDidLoad()
 
     }
